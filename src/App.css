@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+ ul{
+    list-style: none;
+
+ }
+ .info-section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Large Cortexa logo in the background */
+.info-section::before {
+  content: "";
+  position: absolute;
+  right: -170px;
+  bottom: -3px;
+  width: 430px;
+  height: 430px;
+  background-image: url('./assets/logo-light.png');
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  background-position: left center;
+  opacity: 0.35;
+  filter: blur(6px);
+  pointer-events: none;
+  z-index: 0;
+}
