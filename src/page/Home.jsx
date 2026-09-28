@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
 import { Brain } from "lucide-react";
 
+import laptop from "../assets/laptop.jpg";
+
 export default function Home() {
   return (
     <>
       <main>
         {/* Hero Section */}
-        <section className="relative min-h-screen bg-slate-950 text-white pt-32 px-6 mt-10">
+        <section className="relative min-h-screen flex items-center text-white pt-[70px] bg-slate-950 bg-cover bg-center bg-no-repeat" id="hero">
           {/* Hero Container */}
           <div
             className="
@@ -15,6 +17,8 @@ export default function Home() {
             mx-auto
             px-4
             pt-5
+            flex  items-center justify-between
+            gap-5
           "
           >
             {/* Hero Content */}
@@ -287,6 +291,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
+
           </div>
         </section>
         {/* info -section */}

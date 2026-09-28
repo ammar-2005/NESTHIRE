@@ -1,9 +1,21 @@
+import { useEffect, useState } from 'react'
 import logo from '../assets/logo-light.png'
 import { Link } from 'react-router-dom'
 
 export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
   return (
-    <header className="fixed top-0 left-0 w-full z-50 font-sans bg-slate-950 border border-b border-white ">
+    <header  className={`fixed top-0 left-0 w-full z-50 font-sans transition-all duration-300 border-b
+        ${scrolled
+          ? 'bg-slate-950/85 backdrop-blur-md border-white/10 shadow-lg'
+          : 'bg-transparent border-transparent'}`}>
 
   <div className="
     w-full

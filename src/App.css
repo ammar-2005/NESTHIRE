@@ -8,6 +8,11 @@
   position: relative;
   overflow: hidden;
 }
+#hero{
+  background-image: url('./assets/bg-hero.jpg');
+  background-size: cover;
+  background-position: center;
+}
 
 /* Large Cortexa logo in the background */
 .info-section::before {
