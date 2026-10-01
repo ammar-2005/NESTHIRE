@@ -14,15 +14,15 @@
   background-position: center;
 }
 
-/* Large Cortexa logo in the background */
+/* Large NESTHIRE logo in the background */
 .info-section::before {
   content: "";
   position: absolute;
-  right: -170px;
-  bottom: -3px;
+  right: -30px;
+  bottom: -2px;
   width: 430px;
   height: 430px;
-  background-image: url('./assets/logo-light.png');
+  background-image: url('./assets/new-logo.png');
   background-repeat: no-repeat;
   background-size: auto 100%;
   background-position: left center;
@@ -30,4 +30,393 @@
   filter: blur(6px);
   pointer-events: none;
   z-index: 0;
+  animation: anim-float 9s ease-in-out infinite alternate;
+}
+
+/* =====================================================================
+   ANIMATION KIT  —  generic, reusable on any page
+   Usage: add the class to any element. Delay with .anim-d1 … .anim-d12
+   (each step = 100ms). Load animations use fill-mode "backwards", so
+   hover transforms on the same element keep working afterwards.
+   ===================================================================== */
+
+:root {
+  --anim-ease: cubic-bezier(0.22, 0.8, 0.2, 1);
+  --anim-blue: #0757ff;
+  --anim-sky: #08bdff;
+  --anim-cyan: #19d8f5;
+}
+
+/* ---------- Delay steps (set --d, consumed by every load animation) ---------- */
+.anim-d1  { --d: 100ms; }
+.anim-d2  { --d: 200ms; }
+.anim-d3  { --d: 300ms; }
+.anim-d4  { --d: 400ms; }
+.anim-d5  { --d: 500ms; }
+.anim-d6  { --d: 600ms; }
+.anim-d7  { --d: 700ms; }
+.anim-d8  { --d: 800ms; }
+.anim-d9  { --d: 900ms; }
+.anim-d10 { --d: 1000ms; }
+.anim-d11 { --d: 1100ms; }
+.anim-d12 { --d: 1200ms; }
+
+/* Stagger for items of the same row (sets --d too) */
+.anim-i1 { --d: 0s; }
+.anim-i2 { --d: 0.15s; }
+.anim-i3 { --d: 0.3s; }
+.anim-i4 { --d: 0.45s; }
+
+/* ---------- 1. Entrances on load ---------- */
+.anim-fade-in  { animation: anim-fade-in 0.9s var(--anim-ease) var(--d, 0s) backwards; }
+.anim-fade-up  { animation: anim-fade-up 0.9s var(--anim-ease) var(--d, 0s) backwards; }
+.anim-scale-in { animation: anim-scale-in 0.8s var(--anim-ease) var(--d, 0s) backwards; }
+.anim-drop     { animation: anim-drop 0.8s var(--anim-ease) var(--d, 0s) backwards; }
+
+@keyframes anim-fade-in  { from { opacity: 0; } }
+@keyframes anim-fade-up  { from { opacity: 0; translate: 0 24px; } }
+@keyframes anim-scale-in { from { opacity: 0; scale: 0.92; } }
+@keyframes anim-drop     { from { opacity: 0; translate: 0 -100%; } }
+
+/* ---------- 2. Headline: lines rise out of a mask ---------- */
+/* <h1><span class="anim-mask"><span class="anim-mask-inner">Line</span></span></h1> */
+.anim-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.14em;   /* keeps descenders (g, y) from being clipped */
+  margin-bottom: -0.14em;
+}
+.anim-mask-inner {
+  display: inline-block;
+  transform-origin: 0 100%;
+  animation: anim-mask-up 1s var(--anim-ease) var(--d, 0s) backwards;
+}
+@keyframes anim-mask-up {
+  from { translate: 0 110%; rotate: 3deg; }
+}
+
+/* ---------- 3. Gradient text with a slow flowing sheen ---------- */
+.anim-gradient-text {
+  background-image: linear-gradient(
+    90deg,
+    var(--anim-blue), var(--anim-sky), var(--anim-cyan), var(--anim-sky), var(--anim-blue)
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.anim-mask-inner.anim-gradient-text {
+  animation:
+    anim-mask-up 1s var(--anim-ease) var(--d, 0s) backwards,
+    anim-gradient-flow 5s ease-in-out 1.2s infinite alternate;
+}
+.anim-gradient-text:not(.anim-mask-inner) {
+  animation: anim-gradient-flow 5s ease-in-out infinite alternate;
+}
+@keyframes anim-gradient-flow {
+  from { background-position: 0% 50%; }
+  to   { background-position: 100% 50%; }
+}
+
+/* ---------- 4. Eyebrow label: tracking closes in ---------- */
+.anim-track-in { animation: anim-track-in 1.3s var(--anim-ease) var(--d, 0s) backwards; }
+@keyframes anim-track-in {
+  from { opacity: 0; letter-spacing: 0.34em; }
+}
+
+/* ---------- 5. Count-up numbers (pure CSS, no JS) ----------
+   <span class="anim-count" style="--to:90; --ch:3"><span class="sr-only">90%</span></span>
+   --to = final value, --from = start value (default 0), --ch = width in chars,
+   --anim-suffix = text after the number (default "%").
+   The real text stays in the DOM (sr-only) for screen readers / SEO. */
+@property --anim-num {
+  syntax: "<integer>";
+  inherits: false;
+  initial-value: 0;
+}
+.anim-count {
+  --anim-num: var(--to, 0);
+  display: inline-block;
+  min-width: calc(var(--ch, 3) * 1ch);
+  font-variant-numeric: tabular-nums;
+  counter-reset: anim-num var(--anim-num);
+  animation: anim-count 2.2s cubic-bezier(0.16, 0.8, 0.3, 1) calc(var(--d, 0s) + 0.3s) backwards;
+}
+.anim-count::after { content: counter(anim-num) var(--anim-suffix, "%"); }
+@keyframes anim-count {
+  from { --anim-num: var(--from, 0); }
+  to   { --anim-num: var(--to, 0); }
+}
+
+/* ---------- 6. Living background: drifting blue/cyan glows ----------
+   Put on a dark section; its direct content needs `relative z-10`. */
+.anim-aurora {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.anim-aurora::before,
+.anim-aurora::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  border-radius: 50%;
+  filter: blur(90px);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+.anim-aurora::before {
+  width: min(520px, 90vw);
+  height: min(520px, 90vw);
+  top: -140px;
+  left: -120px;
+  background: radial-gradient(circle, rgba(7, 87, 255, 0.45), transparent 65%);
+  animation: anim-drift-a 16s ease-in-out infinite alternate;
+}
+.anim-aurora::after {
+  width: min(460px, 80vw);
+  height: min(460px, 80vw);
+  right: -120px;
+  bottom: -120px;
+  background: radial-gradient(circle, rgba(25, 216, 245, 0.28), transparent 65%);
+  animation: anim-drift-b 20s ease-in-out infinite alternate;
+}
+@keyframes anim-drift-a {
+  to { translate: 160px 90px; scale: 1.2; }
+}
+@keyframes anim-drift-b {
+  to { translate: -140px -80px; scale: 1.25; }
+}
+
+/* ---------- 7. Buttons ---------- */
+/* Light sweep: idles every few seconds, plays fast on hover */
+.anim-shine { position: relative; overflow: hidden; isolation: isolate; }
+.anim-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.4) 50%, transparent 65%);
+  translate: -120% 0;
+  pointer-events: none;
+  animation: anim-shine-idle 5s ease-in-out 2.4s infinite;
+}
+.anim-shine:hover::after { animation: anim-shine-hover 0.8s ease-out; }
+@keyframes anim-shine-idle {
+  0%   { translate: -120% 0; }
+  18%  { translate: 120% 0; }
+  100% { translate: 120% 0; }
+}
+@keyframes anim-shine-hover {
+  from { translate: -120% 0; }
+  to   { translate: 120% 0; }
+}
+
+/* Arrow/icon slides forward when the parent is hovered */
+.anim-nudge-icon { transition: translate 0.3s var(--anim-ease); }
+.anim-nudge:hover .anim-nudge-icon { translate: 5px 0; }
+
+/* Soft glowing heartbeat (play icons, live indicators) */
+.anim-pulse-glow { animation: anim-pulse-glow 2.4s ease-in-out infinite; }
+@keyframes anim-pulse-glow {
+  0%, 100% { scale: 1;    filter: drop-shadow(0 0 0 rgba(25, 216, 245, 0)); }
+  50%      { scale: 1.12; filter: drop-shadow(0 0 6px rgba(25, 216, 245, 0.9)); }
+}
+
+/* ---------- 8. Hover: card lift + icon turns into a brand-gradient badge ---------- */
+.anim-lift {
+  transition: transform 0.35s var(--anim-ease), box-shadow 0.35s var(--anim-ease), border-color 0.35s;
+}
+.anim-lift:hover {
+  transform: translateY(-6px);
+  border-color: rgba(8, 189, 255, 0.55);
+  box-shadow: 0 18px 40px -14px rgba(7, 87, 255, 0.3), 0 0 0 1px rgba(8, 189, 255, 0.2);
+}
+.anim-icon {
+  position: relative;
+  isolation: isolate;
+  transition: transform 0.45s var(--anim-ease), box-shadow 0.35s, color 0.35s;
+}
+.anim-icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--anim-blue), var(--anim-cyan));
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+.anim-lift:hover .anim-icon {
+  transform: rotate(-8deg) scale(1.12);
+  box-shadow: 0 8px 20px rgba(8, 189, 255, 0.4);
+}
+.anim-lift:hover .anim-icon::before { opacity: 1; }
+.anim-lift:hover .anim-icon svg { color: #fff; }
+
+/* ---------- 9. Link underline that grows from the left ---------- */
+.anim-underline { position: relative; }
+.anim-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--anim-blue), var(--anim-cyan));
+  transform-origin: left;
+  scale: 0 1;
+  transition: scale 0.35s var(--anim-ease);
+}
+.anim-underline:hover::after { scale: 1 1; }
+
+/* ---------- 10. Floating (decor, logos) ---------- */
+.anim-float { animation: anim-float 7s ease-in-out infinite alternate; }
+@keyframes anim-float {
+  from { translate: 0 0;       rotate: 0deg; }
+  to   { translate: -14px -18px; rotate: -3deg; }
+}
+
+/* ---------- 11. Play-on-view: ANY animation above can wait for the scroll ----------
+   Add .anim-onview to an element (or a wrapper): every anim-* animation inside
+   it stays paused until it enters the viewport, then plays once with its delay.
+   Needs the tiny hook useAnimOnView() (see useAnimOnView.js). Without JS
+   everything simply plays on load, nothing is ever hidden. */
+.anim-ready .anim-onview:not(.is-inview),
+.anim-ready .anim-onview:not(.is-inview) *,
+.anim-ready .anim-onview:not(.is-inview)::before,
+.anim-ready .anim-onview:not(.is-inview)::after,
+.anim-ready .anim-onview:not(.is-inview) *::before,
+.anim-ready .anim-onview:not(.is-inview) *::after {
+  animation-play-state: paused !important;
+}
+
+/* Bolder entrances for cards / blocks */
+.anim-reveal      { animation: anim-reveal 1s var(--anim-ease) var(--d, 0s) backwards; }
+.anim-reveal-left { animation: anim-reveal-left 1s var(--anim-ease) var(--d, 0s) backwards; }
+.anim-draw-line   { transform-origin: left; animation: anim-draw-line 0.9s var(--anim-ease) var(--d, 0s) backwards; }
+@keyframes anim-reveal {
+  from { opacity: 0; translate: 0 56px; scale: 0.92; filter: blur(8px); }
+}
+@keyframes anim-reveal-left {
+  from { opacity: 0; translate: -48px 0; filter: blur(6px); }
+}
+@keyframes anim-draw-line { from { scale: 0 1; } }
+
+/* Idle arrow that keeps inviting a click */
+.anim-arrow-loop { animation: anim-arrow-loop 1.4s ease-in-out infinite; }
+@keyframes anim-arrow-loop {
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 6px 0; }
+}
+
+/* Soft drifting orbs behind light sections (content needs relative z-10) */
+.anim-orbs { position: relative; overflow: hidden; isolation: isolate; }
+.anim-orbs::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: -120px;
+  left: -140px;
+  width: min(460px, 80vw);
+  height: min(460px, 80vw);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(8, 189, 255, 0.22), transparent 65%);
+  filter: blur(60px);
+  pointer-events: none;
+  animation: anim-drift-a 14s ease-in-out infinite alternate;
+}
+
+/* Card extras: gradient bar draws across the top on hover + sonar ring around the icon */
+.anim-lift { position: relative; overflow: hidden; }
+.anim-lift::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--anim-blue), var(--anim-sky), var(--anim-cyan));
+  transform-origin: left;
+  scale: 0 1;
+  transition: scale 0.55s var(--anim-ease);
+}
+.anim-lift:hover::after { scale: 1 1; }
+.anim-icon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  border-radius: inherit;
+  border: 1.5px solid rgba(8, 189, 255, 0.55);
+  opacity: 0;
+  animation: anim-ring 3.2s ease-out calc(var(--d, 0s) + 0.8s) infinite;
+}
+@keyframes anim-ring {
+  0%   { scale: 1;   opacity: 0.8; }
+  70%  { scale: 1.9; opacity: 0; }
+  100% { scale: 1.9; opacity: 0; }
+}
+
+/* ---------- 12. Footer / dark-section helpers ---------- */
+/* A beam of light that travels along the top edge: <div class="anim-beam" aria-hidden="true" /> */
+.anim-beam {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.08);
+}
+.anim-beam::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 30%;
+  background: linear-gradient(90deg, transparent, var(--anim-cyan), var(--anim-blue), transparent);
+  animation: anim-beam 4.5s ease-in-out infinite;
+}
+@keyframes anim-beam {
+  from { translate: -100% 0; }
+  to   { translate: 340% 0; }
+}
+
+/* Link: slides right and a small cyan dash grows before it */
+.anim-link-slide {
+  display: inline-block;
+  transition: translate 0.3s var(--anim-ease), color 0.3s;
+}
+.anim-link-slide::before {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 1px;
+  margin-right: 0;
+  vertical-align: middle;
+  background: var(--anim-cyan);
+  transition: width 0.3s var(--anim-ease), margin 0.3s var(--anim-ease);
+}
+.anim-link-slide:hover { translate: 2px 0; }
+.anim-link-slide:hover::before { width: 8px; margin-right: 6px; }
+
+/* Icon: springy pop with a cyan glow (social icons, small actions) */
+.anim-pop {
+  display: inline-flex;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s, filter 0.3s;
+}
+.anim-pop:hover {
+  transform: translateY(-4px) scale(1.2);
+  filter: drop-shadow(0 4px 10px rgba(25, 216, 245, 0.6));
+}
+
+/* ---------- Accessibility: respect "reduce motion" ---------- */
+@media (prefers-reduced-motion: reduce) {
+  [class*="anim-"],
+  [class*="anim-"]::before,
+  [class*="anim-"]::after,
+  .info-section::before {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
 }

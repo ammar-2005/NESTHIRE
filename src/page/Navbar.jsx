@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import logo from '../assets/logo-light.png'
+import logo from '../assets/new-logo.png'
 import { Link } from 'react-router-dom'
 
 export default function Navbar() {
@@ -12,7 +12,7 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
   return (
-    <header  className={`fixed top-0 left-0 w-full z-50 font-sans transition-all duration-300 border-b
+    <header  className={`anim-drop fixed top-0 left-0 w-full z-50 font-sans transition-all duration-300 border-b
         ${scrolled
           ? 'bg-slate-950/85 backdrop-blur-md border-white/10 shadow-lg'
           : 'bg-transparent border-transparent'}`}>
@@ -33,7 +33,7 @@ export default function Navbar() {
       <Link to="/">
         <img
           src={logo}
-          alt="Cortexa Logo"
+          alt="NESTHIRE Logo"
           className="h-11 w-auto object-contain"
         />
       </Link>
@@ -59,11 +59,11 @@ export default function Navbar() {
         </li>
 
         <li>
-          <Link to="/">Features</Link>
+          <Link to="/" className="anim-underline">Features</Link>
         </li>
 
         <li className="flex items-center gap-1">
-          <Link to="/">Platform</Link>
+          <Link to="/" className="anim-underline">Platform</Link>
 
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -82,11 +82,11 @@ export default function Navbar() {
         </li>
 
         <li>
-          <Link to="/">Pricing</Link>
+          <Link to="/" className="anim-underline">Pricing</Link>
         </li>
 
         <li className="flex items-center gap-1">
-          <Link to="/">Resources</Link>
+          <Link to="/" className="anim-underline">Resources</Link>
 
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -105,7 +105,7 @@ export default function Navbar() {
         </li>
 
         <li>
-          <Link to="/">About</Link>
+          <Link to="/" className="anim-underline">About</Link>
         </li>
 
       </ul>

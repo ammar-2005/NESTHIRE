@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
-import logo from '../assets/logo-light.png'
+import logo from '../assets/new-logo.png'
 import bgHero from '../assets/bg-heroSection.jpg'
+import useAnimOnView from '../hooks/Useanimonview'
 
 
 
@@ -76,21 +77,26 @@ const socialLinks = [
 ]
 
 export default function Footer() {
+  useAnimOnView()
+
   return (
-    <footer className="relative bg-slate-950 bg-cover bg-bottom" style={{ backgroundImage: `url(${bgHero})` }}>
+    <footer className="relative bg-slate-950 bg-cover bg-bottom anim-onview anim-aurora" style={{ backgroundImage: `url(${bgHero})` }}>
+      <div className="anim-beam" aria-hidden="true" />
      
-      <div className="w-full max-w-[1060px] mx-auto px-4 py-10 grid gap-10 md:grid-cols-[2fr_3fr]">
+      <div className="w-full max-w-[1060px] mx-auto px-4 py-10 grid gap-10 md:grid-cols-[2fr_3fr] relative z-10">
        
         <div>
-          <span className="block mb-2 text-[11px] font-semibold tracking-[0.18em] text-cyan-400 uppercase">
-            The CORTEXA Platform
+          <span className="block mb-2 anim-track-in anim-d1 text-[11px] font-semibold tracking-[0.18em] text-cyan-400 uppercase">
+            The NESTHIRE Platform
           </span>
 
           <h2 className="text-2xl font-bold leading-tight tracking-tight text-white">
-            From Application to Hired
+            <span className="anim-mask">
+              <span className="anim-mask-inner anim-d2">From Application to Hired</span>
+            </span>
           </h2>
 
-          <p className="mt-3 max-w-[340px] text-[13px] leading-6 text-white/70">
+          <p className="anim-fade-up anim-d4 mt-3 max-w-[340px] text-[13px] leading-6 text-white/70">
             A complete recruitment and talent intelligence platform, designed
             for companies, recruiters, and organizations of all sizes.
           </p>
@@ -98,6 +104,7 @@ export default function Footer() {
           <Link
             to={CTA.to}
             className="
+              anim-fade-up anim-d5 anim-shine anim-nudge
               mt-5 inline-flex items-center justify-center gap-2
               h-9 px-5 rounded-lg
               bg-gradient-to-r from-[#0066FF] via-[#0099FF] to-[#00D9FF]
@@ -113,7 +120,7 @@ export default function Footer() {
               viewBox="0 0 24 24"
               strokeWidth={2.5}
               stroke="currentColor"
-              className="w-3.5 h-3.5"
+              className="w-3.5 h-3.5 anim-nudge-icon"
             >
               <path
                 strokeLinecap="round"
@@ -125,8 +132,8 @@ export default function Footer() {
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-          {footerColumns.map((col) => (
-            <div key={col.title}>
+          {footerColumns.map((col, i) => (
+            <div key={col.title} className={`anim-fade-up anim-d${i + 3}`}>
               <h3 className="text-[13px] font-semibold text-white">
                 {col.title}
               </h3>
@@ -135,7 +142,7 @@ export default function Footer() {
                   <li key={item.label}>
                     <Link
                       to={item.to}
-                      className="text-[13px] text-gray-300 hover:text-sky-300 transition"
+                      className="anim-link-slide text-[13px] text-gray-300 hover:text-sky-300 transition"
                     >
                       {item.label}
                     </Link>
@@ -147,12 +154,12 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-white/10">
+      <div className="border-t border-white/10 relative z-10 anim-fade-in anim-d7">
         <div className="w-full max-w-[1060px] mx-auto px-4 py-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <Link to="/" className="flex flex-col gap-1">
             <img
               src={logo}
-              alt="Cortexa Logo"
+              alt="NESTHIRE Logo"
               className="h-7 w-auto object-contain self-start"
             />
             <span className="text-[7px] tracking-[0.2em] text-white/50 uppercase">
@@ -164,7 +171,7 @@ export default function Footer() {
             <ul className="flex items-center gap-5 text-[12px] text-white/70">
               {legalLinks.map((item) => (
                 <li key={item.label}>
-                  <Link to={item.to} className="hover:text-sky-300 transition">
+                  <Link to={item.to} className="anim-link-slide hover:text-sky-300 transition">
                     {item.label}
                   </Link>
                 </li>
@@ -178,7 +185,7 @@ export default function Footer() {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-white/70 hover:text-sky-300 transition"
+                    className="anim-pop text-white/70 hover:text-sky-300 transition"
                   >
                     <span className="sr-only">{item.label}</span>
                     <svg

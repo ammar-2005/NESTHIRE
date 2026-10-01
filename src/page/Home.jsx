@@ -1,33 +1,38 @@
 import { Link } from "react-router-dom";
 import { Brain } from "lucide-react";
+import useAnimOnView from "../hooks/Useanimonview";
 
 import laptop from "../assets/laptop.jpg";
 
 export default function Home() {
+  useAnimOnView()
+
   return (
     <>
       <main>
         {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center text-white pt-[70px] bg-slate-950 bg-cover bg-center bg-no-repeat" id="hero">
+        <section className="relative min-h-screen flex items-center text-white pt-17.5 bg-slate-950 bg-cover bg-center bg-no-repeat anim-aurora" id="hero">
           {/* Hero Container */}
           <div
             className="
             w-full
-            max-w-[1060px]
+            max-w-265
             mx-auto
             px-4
             pt-5
+            relative z-10
             flex  items-center justify-between
             gap-5
           "
           >
             {/* Hero Content */}
-            <div className="max-w-[560px]">
+            <div className="max-w-140">
               {/* Small Heading */}
               <span
                 className="
                 block
                 mb-4
+                anim-track-in
                 text-[12px]
                 font-semibold
                 tracking-[0.18em]
@@ -49,46 +54,41 @@ export default function Home() {
                 text-white
               "
               >
-                Smarter Hiring.
-                <br />
-                <span
-                  className="
-                  bg-gradient-to-r
-                  from-[#0066FF]
-                  via-[#0099FF]
-                  to-[#00D9FF]
-                  bg-clip-text
-                  text-transparent
-                "
-                >
-                  Better Decisions.
+                <span className="anim-mask">
+                  <span className="anim-mask-inner anim-d2">Smarter Hiring.</span>
+                </span>
+                <span className="anim-mask">
+                  <span className="anim-mask-inner anim-gradient-text anim-d4">
+                    Better Decisions.
+                  </span>
                 </span>
               </h1>
 
               {/* Description */}
               <p
                 className="
+                anim-fade-up anim-d6
                 mt-6
-                max-w-[500px]
+                max-w-125
                 text-[16px]
                 leading-7
                 text-white/80
               "
               >
-                CORTEXA combines AI and real evidence to help organizations
+                NESTHIRE combines AI and real evidence to help organizations
                 find, assess, and hire the right talent — faster, fairer, and
                 with full transparency.
               </p>
 
               {/* Buttons */}
-              <div className="flex items-center gap-4 mt-7">
+              <div className="flex items-center gap-4 mt-7 anim-fade-up anim-d7">
                 {/* Get Started */}
                 <button
                   className="
                     h-11
-                    w-[136px]
+                    w-34
                     rounded-lg
-                    bg-gradient-to-r
+                    bg-linear-to-r
                     from-[#0066FF]
                     via-[#0099FF]
                     to-[#00D9FF]
@@ -100,6 +100,7 @@ export default function Home() {
                     justify-center
                     gap-2
                     shadow-[0_4px_20px_rgba(0,180,255,0.25)]
+                    anim-shine anim-nudge
                     hover:brightness-110
                     transition
                   "
@@ -112,7 +113,7 @@ export default function Home() {
                     viewBox="0 0 24 24"
                     strokeWidth={2.5}
                     stroke="currentColor"
-                    className="w-4 h-4"
+                    className="w-4 h-4 anim-arrow-loop"
                   >
                     <path
                       strokeLinecap="round"
@@ -126,7 +127,7 @@ export default function Home() {
                 <button
                   className="
                     h-11
-                    w-[146px]
+                    w-36.5
                     rounded-lg
                     border
                     border-cyan-400/70
@@ -140,6 +141,7 @@ export default function Home() {
                     gap-2
                     hover:bg-cyan-400/10
                     transition
+                    anim-nudge
                   "
                 >
                   <svg
@@ -148,7 +150,7 @@ export default function Home() {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-5 h-5 text-cyan-400"
+                    className="w-5 h-5 text-cyan-400 anim-pulse-glow"
                   >
                     <path
                       strokeLinecap="round"
@@ -172,6 +174,9 @@ export default function Home() {
                 {/* Stat 1 */}
                 <div
                   className="
+                  anim-fade-up anim-d8
+                  anim-fade-up anim-d9
+                  anim-fade-up anim-d10
                   pr-7
                   mr-7
                   border-r
@@ -186,7 +191,9 @@ export default function Home() {
                     text-white
                   "
                   >
-                    90%
+                    <span className="anim-count" style={{ "--to": 90, "--ch": 3 }}>
+                      <span className="sr-only">90%</span>
+                    </span>
                   </span>
 
                   <p
@@ -218,7 +225,9 @@ export default function Home() {
                     text-white
                   "
                   >
-                    70%
+                    <span className="anim-count" style={{ "--to": 70, "--ch": 3 }}>
+                      <span className="sr-only">70%</span>
+                    </span>
                   </span>
 
                   <p
@@ -250,7 +259,9 @@ export default function Home() {
                     text-white
                   "
                   >
-                    100%
+                    <span className="anim-count" style={{ "--to": 100, "--ch": 4 }}>
+                      <span className="sr-only">100%</span>
+                    </span>
                   </span>
 
                   <p
@@ -266,7 +277,7 @@ export default function Home() {
                 </div>
 
                 {/* Stat 4 */}
-                <div>
+                <div className="anim-fade-up anim-d11">
                   <span
                     className="
                     block
@@ -275,7 +286,9 @@ export default function Home() {
                     text-white
                   "
                   >
-                    0%
+                    <span className="anim-count" style={{ "--to": 0, "--from": 100, "--ch": 4 }}>
+                      <span className="sr-only">0%</span>
+                    </span>
                   </span>
 
                   <p
@@ -297,14 +310,16 @@ export default function Home() {
         {/* info -section */}
 <section
   id="info"
-  className="pt-16 pb-16 bg-white info-section"
+  className="pt-16 pb-16 bg-white info-section anim-orbs"
 >
   <div
     className="
       w-full
-      max-w-[1060px]
+      max-w-265
       mx-auto
       px-4
+      relative
+      z-10
       flex
       items-center
       justify-between
@@ -313,12 +328,13 @@ export default function Home() {
   >
 
     {/* LEFT */}
-    <div className="w-[40%]">
+    <div className="w-[40%] anim-onview">
 
       {/* Small title */}
       <div className="mb-3">
         <span
           className="
+            anim-track-in
             text-[15px]
             font-semibold
             tracking-[0.18em]
@@ -326,11 +342,11 @@ export default function Home() {
             uppercase
           "
         >
-          WHY CORTEXA
+          WHY NESTHIRE
         </span>
 
         {/* Small line */}
-        <div className="mt-1 w-10 h-px bg-sky-400" />
+        <div className="mt-1 w-10 h-px bg-sky-400 anim-draw-line anim-d3" />
       </div>
 
 
@@ -344,15 +360,19 @@ export default function Home() {
           text-slate-900
         "
       >
-        Evidence-Based
-        <br />
-        Talent Intelligence
+        <span className="anim-mask">
+          <span className="anim-mask-inner anim-d2">Evidence-Based</span>
+        </span>
+        <span className="anim-mask">
+          <span className="anim-mask-inner anim-d4">Talent Intelligence</span>
+        </span>
       </h2>
 
 
       {/* Description */}
       <p
         className="
+          anim-fade-up anim-d5
           mt-5
           max-w-97.5
           text-[14px]
@@ -360,7 +380,7 @@ export default function Home() {
           text-slate-500
         "
       >
-        Unlike traditional recruitment platforms, CORTEXA goes beyond
+        Unlike traditional recruitment platforms, NESTHIRE goes beyond
         the CV. We use multi-source evidence, AI-powered analysis, and
         explainable insights to help you make confident, data-driven
         hiring decisions — with humans always in control.
@@ -374,12 +394,14 @@ export default function Home() {
           inline-flex
           items-center
           gap-2
+          anim-fade-up anim-d7
           mt-5
           text-[13px]
           font-semibold
           text-sky-500
           hover:text-sky-600
           transition
+          anim-nudge
         "
       >
         <span>Discover the Platform</span>
@@ -390,7 +412,7 @@ export default function Home() {
           viewBox="0 0 24 24"
           strokeWidth={2}
           stroke="currentColor"
-          className="w-4 h-4"
+          className="w-4 h-4 anim-nudge-icon"
         >
           <path
             strokeLinecap="round"
@@ -411,7 +433,8 @@ export default function Home() {
         {/* CARD 1 */}
         <div
           className="
-            min-h-[105px]
+            anim-onview anim-reveal anim-lift anim-i1
+            min-h-26.25
             p-5
             bg-white
             border
@@ -426,6 +449,7 @@ export default function Home() {
           {/* Icon */}
           <div
             className="
+              anim-icon
               w-9
               h-9
               rounded-full
@@ -468,6 +492,7 @@ export default function Home() {
         {/* CARD 2  */}
         <div
           className="
+            anim-onview anim-reveal anim-lift anim-i2
             min-h-[105px]
             p-5
             bg-white
@@ -483,6 +508,7 @@ export default function Home() {
           {/* Icon */}
           <div
             className="
+              anim-icon
               w-9
               h-9
               rounded-full
@@ -511,6 +537,7 @@ export default function Home() {
         {/* CARD 3 */}
         <div
           className="
+            anim-onview anim-reveal anim-lift anim-i3
             min-h-[105px]
             p-5
             bg-white
@@ -526,6 +553,7 @@ export default function Home() {
           {/* Icon */}
           <div
             className="
+              anim-icon
               w-9
               h-9
               rounded-full
@@ -568,6 +596,7 @@ export default function Home() {
         {/* CARD 4 */}
         <div
           className="
+            anim-onview anim-reveal anim-lift anim-i4
             min-h-[105px]
             p-5
             bg-white
@@ -583,6 +612,7 @@ export default function Home() {
           {/* Icon */}
           <div
             className="
+              anim-icon
               w-9
               h-9
               rounded-full
