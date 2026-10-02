@@ -83,7 +83,7 @@ export default function Footer() {
     <footer className="relative bg-slate-950 bg-cover bg-bottom anim-onview anim-aurora" style={{ backgroundImage: `url(${bgHero})` }}>
       <div className="anim-beam" aria-hidden="true" />
      
-      <div className="w-full max-w-[1060px] mx-auto px-4 py-10 grid gap-10 md:grid-cols-[2fr_3fr] relative z-10">
+      <div className="w-full max-w-[1060px] mx-auto px-4 sm:px-6 py-10 grid gap-10 lg:grid-cols-[2fr_3fr] relative z-10">
        
         <div>
           <span className="block mb-2 anim-track-in anim-d1 text-[11px] font-semibold tracking-[0.18em] text-cyan-400 uppercase">
@@ -131,18 +131,18 @@ export default function Footer() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8">
           {footerColumns.map((col, i) => (
             <div key={col.title} className={`anim-fade-up anim-d${i + 3}`}>
               <h3 className="text-[13px] font-semibold text-white">
                 {col.title}
               </h3>
-              <ul className="mt-4 space-y-2.5">
+              <ul className="mt-4 space-y-3 md:space-y-2.5">
                 {col.links.map((item) => (
                   <li key={item.label}>
                     <Link
                       to={item.to}
-                      className="anim-link-slide text-[13px] text-gray-300 hover:text-sky-300 transition"
+                      className="anim-link-slide py-0.5 text-[13px] text-gray-300 hover:text-sky-300 transition"
                     >
                       {item.label}
                     </Link>
@@ -155,37 +155,37 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10 relative z-10 anim-fade-in anim-d7">
-        <div className="w-full max-w-[1060px] mx-auto px-4 py-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="w-full max-w-[1060px] mx-auto px-4 sm:px-6 pt-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:py-3 flex flex-col gap-4 sm:gap-3 sm:flex-row sm:items-center sm:justify-between">
           <Link to="/" className="flex flex-col gap-1">
             <img
               src={logo}
               alt="NESTHIRE Logo"
               className="h-7 w-auto object-contain self-start"
             />
-            <span className="text-[7px] tracking-[0.2em] text-white/50 uppercase">
+            <span className="text-[9px] sm:text-[8px] tracking-[0.18em] text-white/50 uppercase">
               Smart Hiring. Better Decisions.
             </span>
           </Link>
 
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <ul className="flex items-center gap-5 text-[12px] text-white/70">
+            <ul className="flex flex-wrap items-center gap-x-5 gap-y-1 text-[12px] text-white/70">
               {legalLinks.map((item) => (
                 <li key={item.label}>
-                  <Link to={item.to} className="anim-link-slide hover:text-sky-300 transition">
+                  <Link to={item.to} className="anim-link-slide py-1 hover:text-sky-300 transition">
                     {item.label}
                   </Link>
                 </li>
               ))}
             </ul>
 
-            <ul className="flex items-center gap-3.5">
+            <ul className="flex items-center gap-2">
               {socialLinks.map((item) => (
                 <li key={item.label}>
                   <a
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="anim-pop text-white/70 hover:text-sky-300 transition"
+                    className="anim-pop p-2 text-white/70 hover:text-sky-300 transition"
                   >
                     <span className="sr-only">{item.label}</span>
                     <svg

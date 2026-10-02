@@ -11,14 +11,14 @@ export default function Home() {
     <>
       <main>
         {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center text-white pt-17.5 bg-slate-950 bg-cover bg-center bg-no-repeat anim-aurora" id="hero">
+        <section className="relative min-h-svh flex items-center text-white pt-17.5 pb-12 md:pb-0 bg-slate-950 bg-cover bg-center bg-no-repeat anim-aurora" id="hero">
           {/* Hero Container */}
           <div
             className="
             w-full
             max-w-265
             mx-auto
-            px-4
+            px-4 sm:px-6
             pt-5
             relative z-10
             flex  items-center justify-between
@@ -26,16 +26,16 @@ export default function Home() {
           "
           >
             {/* Hero Content */}
-            <div className="max-w-140">
+            <div className="w-full max-w-140">
               {/* Small Heading */}
               <span
                 className="
                 block
                 mb-4
                 anim-track-in
-                text-[12px]
+                text-[11px] sm:text-[12px]
                 font-semibold
-                tracking-[0.18em]
+                tracking-[0.14em] sm:tracking-[0.18em]
                 text-cyan-400
                 uppercase
               "
@@ -46,7 +46,8 @@ export default function Home() {
               {/* Main Heading */}
               <h1
                 className="
-                text-5xl
+                text-[clamp(2rem,9.5vw,3rem)]
+                sm:text-5xl
                 md:text-6xl
                 font-bold
                 leading-[1.05]
@@ -68,9 +69,9 @@ export default function Home() {
               <p
                 className="
                 anim-fade-up anim-d6
-                mt-6
+                mt-5 sm:mt-6
                 max-w-125
-                text-[16px]
+                text-[15px] sm:text-[16px]
                 leading-7
                 text-white/80
               "
@@ -81,12 +82,14 @@ export default function Home() {
               </p>
 
               {/* Buttons */}
-              <div className="flex items-center gap-4 mt-7 anim-fade-up anim-d7">
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-7 anim-fade-up anim-d7">
                 {/* Get Started */}
                 <button
                   className="
-                    h-11
-                    w-34
+                    h-12 sm:h-11
+                    grow basis-35 sm:grow-0 sm:basis-auto
+                    sm:w-34
+                    px-4 sm:px-0
                     rounded-lg
                     bg-linear-to-r
                     from-[#0066FF]
@@ -126,8 +129,10 @@ export default function Home() {
                 {/* Watch Demo */}
                 <button
                   className="
-                    h-11
-                    w-36.5
+                    h-12 sm:h-11
+                    grow basis-35 sm:grow-0 sm:basis-auto
+                    sm:w-36.5
+                    px-4 sm:px-0
                     rounded-lg
                     border
                     border-cyan-400/70
@@ -166,21 +171,18 @@ export default function Home() {
               {/* Stats */}
               <div
                 className="
-                flex
-                items-center
-                mt-10
+                grid grid-cols-2 gap-x-4 gap-y-6
+                mt-9 md:mt-10
+                md:flex md:items-center md:gap-0
               "
               >
                 {/* Stat 1 */}
                 <div
                   className="
                   anim-fade-up anim-d8
-                  anim-fade-up anim-d9
-                  anim-fade-up anim-d10
-                  pr-7
-                  mr-7
-                  border-r
-                  border-white/20
+                  border-l-2 border-cyan-400/40 pl-4
+                  md:border-l-0 md:pl-0 md:pr-6 md:mr-6 lg:pr-7 lg:mr-7
+                  md:border-r md:border-white/20
                 "
                 >
                   <span
@@ -199,9 +201,9 @@ export default function Home() {
                   <p
                     className="
                     mt-1
-                    text-[11px]
+                    text-[12px] md:text-[11px] leading-snug
                     text-white/70
-                    whitespace-nowrap
+                    md:whitespace-nowrap
                   "
                   >
                     Better Match Accuracy
@@ -211,10 +213,10 @@ export default function Home() {
                 {/* Stat 2 */}
                 <div
                   className="
-                  pr-7
-                  mr-7
-                  border-r
-                  border-white/20
+                  anim-fade-up anim-d9
+                  border-l-2 border-cyan-400/40 pl-4
+                  md:border-l-0 md:pl-0 md:pr-6 md:mr-6 lg:pr-7 lg:mr-7
+                  md:border-r md:border-white/20
                 "
                 >
                   <span
@@ -233,9 +235,9 @@ export default function Home() {
                   <p
                     className="
                     mt-1
-                    text-[11px]
+                    text-[12px] md:text-[11px] leading-snug
                     text-white/70
-                    whitespace-nowrap
+                    md:whitespace-nowrap
                   "
                   >
                     Faster Hiring Process
@@ -245,10 +247,10 @@ export default function Home() {
                 {/* Stat 3 */}
                 <div
                   className="
-                  pr-7
-                  mr-7
-                  border-r
-                  border-white/20
+                  anim-fade-up anim-d10
+                  border-l-2 border-cyan-400/40 pl-4
+                  md:border-l-0 md:pl-0 md:pr-6 md:mr-6 lg:pr-7 lg:mr-7
+                  md:border-r md:border-white/20
                 "
                 >
                   <span
@@ -267,9 +269,9 @@ export default function Home() {
                   <p
                     className="
                     mt-1
-                    text-[11px]
+                    text-[12px] md:text-[11px] leading-snug
                     text-white/70
-                    whitespace-nowrap
+                    md:whitespace-nowrap
                   "
                   >
                     Explainable Results
@@ -277,7 +279,7 @@ export default function Home() {
                 </div>
 
                 {/* Stat 4 */}
-                <div className="anim-fade-up anim-d11">
+                <div className="anim-fade-up anim-d11 border-l-2 border-cyan-400/40 pl-4 md:border-l-0 md:pl-0">
                   <span
                     className="
                     block
@@ -294,9 +296,9 @@ export default function Home() {
                   <p
                     className="
                     mt-1
-                    text-[11px]
+                    text-[12px] md:text-[11px] leading-snug
                     text-white/70
-                    whitespace-nowrap
+                    md:whitespace-nowrap
                   "
                   >
                     CV-only Decisions
@@ -310,25 +312,25 @@ export default function Home() {
         {/* info -section */}
 <section
   id="info"
-  className="pt-16 pb-16 bg-white info-section anim-orbs"
+  className="py-14 lg:py-16 bg-white info-section anim-orbs"
 >
   <div
     className="
       w-full
       max-w-265
       mx-auto
-      px-4
+      px-4 sm:px-6
       relative
       z-10
-      flex
-      items-center
-      justify-between
-      gap-12
+      flex flex-col lg:flex-row
+      lg:items-center
+      lg:justify-between
+      gap-10 lg:gap-12
     "
   >
 
     {/* LEFT */}
-    <div className="w-[40%] anim-onview">
+    <div className="w-full lg:w-[40%] anim-onview">
 
       {/* Small title */}
       <div className="mb-3">
@@ -353,7 +355,7 @@ export default function Home() {
       {/* Heading */}
       <h2
         className="
-          text-[40px]
+          text-[clamp(1.75rem,8vw,2.5rem)]
           leading-[1.05]
           font-bold
           tracking-tight
@@ -375,7 +377,7 @@ export default function Home() {
           anim-fade-up anim-d5
           mt-5
           max-w-97.5
-          text-[14px]
+          text-[15px] lg:text-[14px]
           leading-[1.7]
           text-slate-500
         "
@@ -395,7 +397,8 @@ export default function Home() {
           items-center
           gap-2
           anim-fade-up anim-d7
-          mt-5
+          py-1
+          mt-4
           text-[13px]
           font-semibold
           text-sky-500
@@ -426,9 +429,9 @@ export default function Home() {
 
 
     {/*RIGHT */}
-    <div className="w-[60%]">
+    <div className="w-full lg:w-[60%]">
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
 
         {/* CARD 1 */}
         <div
@@ -481,7 +484,7 @@ export default function Home() {
             Multi-Source Evidence
           </h3>
 
-          <p className="mt-1 text-[12px] leading-[1.5] text-slate-500">
+          <p className="mt-1 text-[13px] sm:text-[12px] leading-[1.5] text-slate-500">
             Combine CVs, practical tests, and structured interviews
             for a complete talent picture.
           </p>
@@ -526,7 +529,7 @@ export default function Home() {
             AI-Powered Matching
           </h3>
 
-          <p className="mt-1 text-[12px] leading-[1.5] text-slate-500">
+          <p className="mt-1 text-[13px] sm:text-[12px] leading-[1.5] text-slate-500">
             Semantic understanding, not just keywords. Find the real
             fit, not just the right words.
           </p>
@@ -585,7 +588,7 @@ export default function Home() {
             Explainable Intelligence
           </h3>
 
-          <p className="mt-1 text-[12px] leading-[1.5] text-slate-500">
+          <p className="mt-1 text-[13px] sm:text-[12px] leading-[1.5] text-slate-500">
             See the evidence behind every recommendation. Full
             transparency and auditability.
           </p>
@@ -644,7 +647,7 @@ export default function Home() {
             Human-in-the-Loop
           </h3>
 
-          <p className="mt-1 text-[12px] leading-[1.5] text-slate-500">
+          <p className="mt-1 text-[13px] sm:text-[12px] leading-[1.5] text-slate-500">
             AI assists. Recruiters, hiring managers and authorized
             humans make the final decision.
           </p>
